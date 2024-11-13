@@ -22,7 +22,7 @@ const Header = () => {
       <div className="w-[60%] px-3 relative">
         <input
           type="text"
-          className="border w-full p-2 outline-none bg-[#F9F9F9] rounded-lg px-8 text-gray-500"
+          className="w-full p-2 outline-none bg-[#F9F9F9] rounded-xl px-9 py-2.5 text-gray-500 border"
           placeholder="Поиск пиццы..."
         />
         <img
@@ -35,10 +35,10 @@ const Header = () => {
 
       {/* Кнопки Заказы и Корзина */}
       <div className="flex gap-3 items-center  ">
-        <div className="px-3.5 text-[#FE731F] border border-[#FE731F] rounded-lg h-[40px] flex flex-col justify-center">
+        <div className="px-3.5 text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center">
           <button>Заказы</button>
         </div>
-        <div className="px-2  text-[#FE731F] border border-[#FE731F] rounded-lg h-[40px] flex flex-col justify-center">
+        <div className="px-2.5  text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center cursor-pointer">
           <img src={cart} alt="cart" />
         </div>
       </div>
