@@ -1,0 +1,17 @@
+.products {
+  width: 80%;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* border: 1px solid red; */
+  gap: 70px;
+}
+
+.filters_products {
+  width: 20%;
+
+  /* 
+  border: 1px solid blue; */
+}

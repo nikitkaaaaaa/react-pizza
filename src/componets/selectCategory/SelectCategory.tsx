@@ -17,7 +17,7 @@ const SelectCategory = () => {
         <div
           key={index}
           className={`cursor-pointer px-4 flex items-center rounded-2xl ${
-            index == selectedProduct && "bg-white text-[#FE5F00] shadow-sm"
+            index == selectedProduct && "bg-white text-[#FE5F00] shadow-sm "
           }`}
           onClick={() => setSelectedProduct(index)}
         >

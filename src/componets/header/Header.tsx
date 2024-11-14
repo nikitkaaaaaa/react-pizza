@@ -12,7 +12,7 @@ const Header = () => {
       <div className="flex items-center">
         <img src={logo} alt="logo" />
         <div className="ml-3">
-          <div className="text-lg font-semibold">REACT PIZZA</div>
+          <div className="text-lg font-bold">REACT PIZZA</div>
           <div className="text-gray-500">самые вкусные пиццы у нас</div>
         </div>
       </div>
@@ -22,13 +22,13 @@ const Header = () => {
       <div className="w-[60%] px-3 relative">
         <input
           type="text"
-          className="w-full p-2 outline-none bg-[#F9F9F9] rounded-xl px-9 py-2.5 text-gray-500 border"
+          className="w-full p-2 outline-none bg-[#F9F9F9] rounded-xl px-10 py-2.5 text-gray-500"
           placeholder="Поиск пиццы..."
         />
         <img
           src={lupa}
           alt="lupa"
-          className="absolute left-5 top-1/2 transform -translate-y-1/2 "
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 "
         />
       </div>
       {/* Поле ввода */}
