@@ -11,7 +11,7 @@ const App = () => {
         <Header />
       </div>
 
-      <hr className="my-9" />
+      <hr className="my-6" />
 
       <div className="container">
         <Main />

@@ -3,13 +3,10 @@ import React, { useState } from "react";
 import selected_item_on_filter from "../../../assets/icons/selected_item_on_filter.svg";
 import WeigthProductsFilter from "./weigthProductsFilter/WeigthProductsFilter";
 import TypeDoughFilter from "./typeDoughFilter/TypeDoughFilter";
-import PriceProductFilter from "./priceProductFilter/PriceProductFilter";
+import PriceProductsFilter from "./priceProductsFilter/PriceProductsFilter";
+import SizeProductsFilter from "./sizeProductsFilter/SizeProductsFilter";
 
 const FltersProducts = () => {
-  const [selectedTypeDough, setSelectedTypeDough] = useState<number>(0);
-
-  const [selectedTypeWeigth, setSelectedTypeWeigt] = useState<number>(1);
-
   const [selectedNewProducts, setSelectedNewProducts] =
     useState<boolean>(false);
 
@@ -36,28 +33,28 @@ const FltersProducts = () => {
       </div>
       {/* Выбрать только по новинкам  */}
 
-      <hr className="my-7" />
+      <hr className="my-4" />
 
       {/* Фильтр по цене  */}
-      <PriceProductFilter />
+      <PriceProductsFilter />
       {/* Фильтр по цене  */}
 
-      <hr className="my-7" />
+      <hr className="my-4" />
 
       {/* Фильтр по весу */}
-      <WeigthProductsFilter
-        selectedTypeWeigth={selectedTypeWeigth}
-        handleSelect={(item: number) => setSelectedTypeWeigt(item)}
-      />
+      <WeigthProductsFilter />
       {/* Фильтр по весу */}
 
-      <hr className="my-7" />
+      <hr className="my-4" />
+
+      {/* Фильтр по размеру */}
+      <SizeProductsFilter />
+      {/* Фильтр по размеру */}
+
+      <hr className="my-4" />
 
       {/* Фильтр по типу теста */}
-      <TypeDoughFilter
-        selectedTypeDough={selectedTypeDough}
-        handleSelectTypeDough={(item: number) => setSelectedTypeDough(item)}
-      />
+      <TypeDoughFilter />
       {/* Фильтр по типу теста */}
 
       <button className="rounded-2xl text-white bg-[#FE5F00] w-[250px] h-[50px] mt-7">

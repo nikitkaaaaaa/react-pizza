@@ -1,9 +1,9 @@
 import React from "react";
 
-const PriceProductFilter = () => {
+const PriceProductsFilter = () => {
   return (
     <div>
-      <div className="font-bold text-xl mb-4">Цена от и до:</div>
+      <div className="font-bold text-xl mb-3">Цена от и до:</div>
       <div className=" flex  justify-between gap-2 my-2.5">
         <input
           type="text"
@@ -20,4 +20,4 @@ const PriceProductFilter = () => {
   );
 };
 
-export default PriceProductFilter;
+export default PriceProductsFilter;

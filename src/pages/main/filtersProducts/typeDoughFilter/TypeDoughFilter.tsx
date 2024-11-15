@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
-interface TypeDoughFilterProps {
-  selectedTypeDough: number;
-  handleSelectTypeDough: (item: number) => void;
-}
-
-const TypeDoughFilter = ({
-  selectedTypeDough,
-  handleSelectTypeDough,
-}: TypeDoughFilterProps) => {
+const TypeDoughFilter = () => {
   const typeDough: string[] = ["Традиционное", "Тонкое"];
+
+  const [selectedTypeDough, setSelectedTypeDough] = useState<number>();
 
   return (
     <div>
-      <div className="font-bold text-xl mb-4">Тип теста:</div>
+      <div className="font-bold text-xl mb-3">Тип теста:</div>
       <div>
         {typeDough.map((item, index) => (
           <div key={index} className="flex my-2.5 gap-2 items-center">
@@ -21,7 +15,7 @@ const TypeDoughFilter = ({
               className={`w-6 h-6 rounded-[30px]  flex flex-col justify-center items-center cursor-pointer ${
                 selectedTypeDough === index ? "bg-[#FE5F00]" : "bg-[#F1F1F1]"
               }`}
-              onClick={() => handleSelectTypeDough(index)}
+              onClick={() => setSelectedTypeDough(index)}
             >
               <div
                 className={`w-[10px] h-[10px] rounded-[30px] ${
@@ -31,7 +25,7 @@ const TypeDoughFilter = ({
             </div>
             <div
               className="cursor-pointer"
-              onClick={() => handleSelectTypeDough(index)}
+              onClick={() => setSelectedTypeDough(index)}
             >
               {item}
             </div>

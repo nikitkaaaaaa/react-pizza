@@ -1,35 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 
-interface WeigthProductsFilterProps {
-  selectedTypeWeigth: number;
-  handleSelect: (item: number) => void;
-}
+import selected_item_on_filter from "../../../../assets/icons/selected_item_on_filter.svg";
 
-const WeigthProductsFilter = ({
-  selectedTypeWeigth,
-  handleSelect,
-}: WeigthProductsFilterProps) => {
+const WeigthProductsFilter = () => {
+  const [selectedTypeWeigth, setSelectedTypeWeigt] = useState<string[]>([]);
+
   const weigthProducts: string[] = ["250 гр", "350 гр", "500 гр"];
+
+  const handleSelectedTypeWeigt = (item: string) => {
+    if (selectedTypeWeigth.includes(item)) {
+      setSelectedTypeWeigt(
+        selectedTypeWeigth.filter((weigt) => weigt !== item)
+      );
+    } else {
+      setSelectedTypeWeigt([...selectedTypeWeigth, item]);
+    }
+  };
 
   return (
     <div>
-      <div className="font-bold text-xl mb-4">Вес пиццы</div>
+      <div className="font-bold text-xl mb-3">Вес</div>
       <div>
         {weigthProducts.map((item, index) => (
           <div key={index} className="flex my-2.5 gap-2 items-center">
             <div
-              className={`w-6 h-6 rounded-[30px]  flex flex-col justify-center items-center cursor-pointer ${
-                selectedTypeWeigth === index ? "bg-[#FE5F00]" : "bg-[#F1F1F1]"
+              className={`w-6 h-6 rounded-lg flex justify-center items-center cursor-pointer ${
+                selectedTypeWeigth.includes(item)
+                  ? "bg-[#FE5F00]"
+                  : "bg-[#F1F1F1]"
               }`}
-              onClick={() => handleSelect(index)}
+              onClick={() => handleSelectedTypeWeigt(item)}
             >
-              <div
-                className={`w-[10px] h-[10px] rounded-[30px] ${
-                  selectedTypeWeigth === index && "bg-[white]"
-                }`}
-              ></div>
+              {selectedTypeWeigth.includes(item) && (
+                <img src={selected_item_on_filter} alt="icon arrow" />
+              )}
             </div>
-            <div className="cursor-pointer" onClick={() => handleSelect(index)}>
+            <div
+              className="cursor-pointer"
+              onClick={() => handleSelectedTypeWeigt(item)}
+            >
               {item}
             </div>
           </div>
