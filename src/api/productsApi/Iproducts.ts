@@ -4,4 +4,5 @@ export default interface Iproducts {
   price: number;
   title: string;
   description: string;
+  category: number;
 }

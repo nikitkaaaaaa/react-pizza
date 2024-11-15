@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import style from "./main.module.css";
 import SelectCategory from "../../componets/selectCategory/SelectCategory";
 import SortProducts from "../../componets/sortProducts/SortProducts";
 import Products from "./products/Products";
 import FltersProducts from "./filtersProducts/FltersProducts";
+import { useGetProductsQuery } from "../../api/productsApi/productsApi";
 
 const Main = () => {
+  const [sort, setSort] = useState<string>("-rating"); // тип сортировки продукта
+
+  const { data: products = [], isLoading } = useGetProductsQuery({
+    sort: sort,
+  });
+
   return (
     <div>
       <div className="text-3xl font-bold">Все пиццы</div>
@@ -14,7 +21,9 @@ const Main = () => {
       {/* Выбор категории продуктов и сортирвока */}
       <div className=" flex justify-between items-center my-8">
         <SelectCategory />
-        <SortProducts />
+        <SortProducts
+          handleSortProducts={(typeSort: string) => setSort(typeSort)}
+        />
       </div>
       {/* Выбор категории продуктов и сортирвока */}
 
@@ -25,7 +34,7 @@ const Main = () => {
         </div>
 
         <div className={style.products}>
-          <Products />
+          <Products products={products} />
         </div>
       </div>
     </div>

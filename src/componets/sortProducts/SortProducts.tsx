@@ -2,14 +2,27 @@ import React, { useState } from "react";
 
 import sort from "../../assets/icons/sort.svg";
 
-const SortProducts = () => {
+interface SortProductsProps {
+  handleSortProducts: (typeSort: string) => void;
+}
+
+const SortProducts = ({ handleSortProducts }: SortProductsProps) => {
   const [showSort, setShowSort] = useState<boolean>(false);
 
-  const tupeSort: string[] = ["рейтенгу", "стоимость", "алфавит"];
+  const tupeSort: { title: string; value: string }[] = [
+    { title: "рейтенгу", value: "-rating" },
+    { title: "стоимость", value: "price" },
+    { title: "алфавит", value: "title" },
+  ];
 
   const [currentTypeChoise, setCurrentTypeChoise] = useState<string>(
-    tupeSort[0]
+    tupeSort[0].title
   );
+
+  const onSortProducts = (title: string, value: string) => {
+    handleSortProducts(value);
+    setCurrentTypeChoise(title);
+  };
 
   return (
     <div
@@ -28,10 +41,10 @@ const SortProducts = () => {
           {tupeSort.map((item, index) => (
             <div
               key={index}
-              onClick={() => setCurrentTypeChoise(item)}
+              onClick={() => onSortProducts(item.title, item.value)}
               className=" rounded-2xl py-2.5 pl-7  hover:bg-[#FFF6F4] hover:text-[#FE5F00] "
             >
-              <div>{item}</div>
+              <div>{item.title}</div>
             </div>
           ))}
         </div>
