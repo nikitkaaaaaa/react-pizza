@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 
+import selected_item_on_filter from "../../../../assets/icons/selected_item_on_filter.svg";
+
 interface TypeDoughFilterProps {
-  selectedTypeDough: number;
-  typeDough: string[];
-  handleSelectTypeDough: (index: number) => void;
+  selectedTypeDough: string[];
+  handleSelectedTypeDough: (item: string) => void;
 }
 
 const TypeDoughFilter = ({
   selectedTypeDough,
-  typeDough,
-  handleSelectTypeDough,
+
+  handleSelectedTypeDough,
 }: TypeDoughFilterProps) => {
+  const typeDough: string[] = ["Традиционное", "Тонкое"];
+
   return (
     <div>
       <div className="font-bold text-xl mb-3">Тип теста:</div>
@@ -18,20 +21,20 @@ const TypeDoughFilter = ({
         {typeDough.map((item, index) => (
           <div key={index} className="flex my-2.5 gap-2 items-center">
             <div
-              className={`w-6 h-6 rounded-[30px]  flex flex-col justify-center items-center cursor-pointer ${
-                selectedTypeDough === index ? "bg-[#FE5F00]" : "bg-[#F1F1F1]"
+              className={`w-6 h-6 rounded-lg flex justify-center items-center cursor-pointer ${
+                selectedTypeDough.includes(item)
+                  ? "bg-[#FE5F00]"
+                  : "bg-[#F1F1F1]"
               }`}
-              onClick={() => handleSelectTypeDough(index)}
+              onClick={() => handleSelectedTypeDough(item)}
             >
-              <div
-                className={`w-[10px] h-[10px] rounded-[30px] ${
-                  selectedTypeDough === index && "bg-[white]"
-                }`}
-              ></div>
+              {selectedTypeDough.includes(item) && (
+                <img src={selected_item_on_filter} alt="icon arrow" />
+              )}
             </div>
             <div
               className="cursor-pointer"
-              onClick={() => handleSelectTypeDough(index)}
+              onClick={() => handleSelectedTypeDough(item)}
             >
               {item}
             </div>

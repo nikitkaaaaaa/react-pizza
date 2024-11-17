@@ -10,11 +10,13 @@ import { useGetProductsQuery } from "../../api/productsApi/productsApi";
 const Main = () => {
   const [sort, setSort] = useState<string>("-rating"); // тип сортировки продукта
 
-  const [typeDough, setTypeDough] = useState<string>(""); // фильтр, который фильтрует продукты по типу теста
+  const [typeDough, setTypeDough] = useState<string[]>([]); // фильтр, который фильтрует продукты по типу теста
 
   const [weigth, setWeigth] = useState<string[]>([]); // фильтр, который фильтрует продукты по массе
 
   const [size, setSize] = useState<string[]>([]); // фильтр, который фильтрует продукты по размеру
+
+  const [feature, setFeature] = useState<string[]>([]); // фильтр, который фильтрует продукты, которые являются новинкой или подходят для компании
 
   const [priceFrom, setPriceFrom] = useState<string>(""); // фильтр, который фильтрует продукты по цене (от)
 
@@ -30,6 +32,7 @@ const Main = () => {
     priceFrom: priceFrom,
     priceTo: priceTo,
     category: category,
+    feature: feature,
   });
 
   return (
@@ -53,11 +56,14 @@ const Main = () => {
       <div className="flex gap-32 bordser border-red-800 ">
         <div className={style.filters_products}>
           <FltersProducts
-            handleSelectTypeDough={(typeDough: string) =>
+            handleSelectTypeDough={(typeDough: string[]) =>
               setTypeDough(typeDough)
             }
             handleSelectWeigthProducts={(weigth: string[]) => setWeigth(weigth)}
             handleSelectSizeProducts={(size: string[]) => setSize(size)}
+            handleSelectFeatureProducts={(feature: string[]) =>
+              setFeature(feature)
+            }
             handleSelectPriceFrom={(priceFrom: string) =>
               setPriceFrom(priceFrom)
             }

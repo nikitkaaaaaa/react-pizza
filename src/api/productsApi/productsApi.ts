@@ -10,12 +10,13 @@ export const productsApi = createApi({
       Iproducts[],
       {
         sort?: string;
-        typeDough?: string;
+        typeDough?: string[];
         weigth?: string[];
         size?: string[];
         priceFrom?: string;
         priceTo?: string;
         category?: string;
+        feature?: string[];
       }
     >({
       query: ({
@@ -26,18 +27,29 @@ export const productsApi = createApi({
         priceFrom,
         priceTo,
         category,
+        feature,
       }) => {
         const params = new URLSearchParams();
 
         if (sort) params.append("sortBy", sort);
-
-        if (typeDough) params.append("typeDough", typeDough);
 
         if (priceFrom) params.append("price[from]", priceFrom);
 
         if (priceTo) params.append("price[to]", priceTo);
 
         if (category) params.append("category", category);
+
+        if (feature) {
+          feature.forEach((item) => {
+            params.append("feature[]", item);
+          });
+        }
+
+        if (typeDough) {
+          typeDough.forEach((item) => {
+            params.append("typeDough[]", item);
+          });
+        }
 
         if (weigth) {
           weigth.forEach((item) => {

@@ -39,7 +39,7 @@ const PriceProductsFilter = ({
         <input
           type="text"
           className="outline-none rounded-lg border h-[40px] w-full px-4 text-gray-500"
-          placeholder="1200 ₽"
+          placeholder="699 ₽"
           value={valuePriceTo}
           onChange={(value) => handleUpdatePriceTo(value)}
         />

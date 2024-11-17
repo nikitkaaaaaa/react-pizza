@@ -9,4 +9,5 @@ export default interface Iproducts {
   weigth: string;
   size: string;
   category: string;
+  feature: string;
 }

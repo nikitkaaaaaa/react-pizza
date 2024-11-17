@@ -4,13 +4,15 @@ import WeigthProductsFilter from "./weigthProductsFilter/WeigthProductsFilter";
 import TypeDoughFilter from "./typeDoughFilter/TypeDoughFilter";
 import PriceProductsFilter from "./priceProductsFilter/PriceProductsFilter";
 import SizeProductsFilter from "./sizeProductsFilter/SizeProductsFilter";
+import FeatureProductsFilter from "./featureProductsFilter/FeatureProductsFilter";
 
 interface FltersProductsProps {
-  handleSelectTypeDough: (typeDough: string) => void;
+  handleSelectTypeDough: (typeDough: string[]) => void;
   handleSelectWeigthProducts: (weigth: string[]) => void;
   handleSelectSizeProducts: (size: string[]) => void;
   handleSelectPriceFrom: (priceFrom: string) => void;
   handleSelectPriceTo: (priceFrom: string) => void;
+  handleSelectFeatureProducts: (feature: string[]) => void;
 }
 
 const FltersProducts = ({
@@ -19,14 +21,15 @@ const FltersProducts = ({
   handleSelectSizeProducts,
   handleSelectPriceFrom,
   handleSelectPriceTo,
+  handleSelectFeatureProducts,
 }: FltersProductsProps) => {
-  const typeDough: string[] = ["Традиционное", "Тонкое"];
-
-  const [selectedTypeDough, setSelectedTypeDough] = useState<number>(); // выбранный обьект из списка типа теста продукта
+  const [selectedTypeDough, setSelectedTypeDough] = useState<string[]>([]); // выбранный обьект из списка типа теста продукта
 
   const [selectedTypeWeigth, setSelectedTypeWeigt] = useState<string[]>([]); // выбранный обьект из списка массы продукта
 
   const [selectedSize, setSelectedSize] = useState<string[]>([]); // выбранный обьект из списка размера продукта
+
+  const [selectedFeature, setSelectedFeature] = useState<string[]>([]); // выбранный обьект из списка особенностей продукта
 
   const [valuePriceFrom, setValuePriceFrom] = useState<string>(""); //значение цены (от)
 
@@ -50,16 +53,42 @@ const FltersProducts = ({
     }
   };
 
+  const handleSelectedTypeDough = (item: string) => {
+    if (selectedTypeDough.includes(item)) {
+      setSelectedTypeDough(selectedTypeDough.filter((size) => size !== item));
+    } else {
+      setSelectedTypeDough([...selectedTypeDough, item]);
+    }
+  };
+
+  const handleSelectedTypeFeature = (item: string) => {
+    if (selectedFeature.includes(item)) {
+      setSelectedFeature(selectedFeature.filter((feature) => feature !== item));
+    } else {
+      setSelectedFeature([...selectedFeature, item]);
+    }
+  };
+
   const handleUpdateFilters = () => {
-    handleSelectTypeDough(typeDough[selectedTypeDough ?? 0]);
+    handleSelectTypeDough(selectedTypeDough);
     handleSelectWeigthProducts(selectedTypeWeigth);
     handleSelectSizeProducts(selectedSize);
+    handleSelectFeatureProducts(selectedFeature);
     handleSelectPriceFrom(valuePriceFrom);
     handleSelectPriceTo(valuePriceTo);
   };
 
   return (
     <div className="text-lg">
+      {/* Фильтр по новинкам и для компании */}
+      <FeatureProductsFilter
+        selectedFeature={selectedFeature}
+        handleSelectedTypeFeature={handleSelectedTypeFeature}
+      />
+      {/* Фильтр по новинкам и для компании */}
+
+      <hr className="my-5" />
+
       {/* Фильтр по цене  */}
       <PriceProductsFilter
         handleSelectPriceFrom={(priceFrom: string) =>
@@ -91,14 +120,13 @@ const FltersProducts = ({
 
       {/* Фильтр по типу теста */}
       <TypeDoughFilter
-        selectedTypeDough={selectedTypeDough ?? 1}
-        typeDough={typeDough}
-        handleSelectTypeDough={(index: number) => setSelectedTypeDough(index)}
+        selectedTypeDough={selectedTypeDough}
+        handleSelectedTypeDough={handleSelectedTypeDough}
       />
       {/* Фильтр по типу теста */}
 
       <button
-        className="rounded-2xl text-white bg-[#FE5F00] w-[250px] h-[50px] mt-7"
+        className="rounded-2xl text-white bg-[#FE5F00] w-[250px] h-[50px] mt-6"
         onClick={handleUpdateFilters}
       >
         Применить
