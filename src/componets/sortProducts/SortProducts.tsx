@@ -10,7 +10,7 @@ const SortProducts = ({ handleSortProducts }: SortProductsProps) => {
   const [showSort, setShowSort] = useState<boolean>(false);
 
   const tupeSort: { title: string; value: string }[] = [
-    { title: "рейтенгу", value: "-rating" },
+    { title: "рейтингу", value: "-rating" },
     { title: "стоимость", value: "price" },
     { title: "алфавит", value: "title" },
   ];

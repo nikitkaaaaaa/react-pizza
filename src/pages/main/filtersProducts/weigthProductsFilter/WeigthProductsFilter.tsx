@@ -2,20 +2,16 @@ import React, { useState } from "react";
 
 import selected_item_on_filter from "../../../../assets/icons/selected_item_on_filter.svg";
 
-const WeigthProductsFilter = () => {
-  const [selectedTypeWeigth, setSelectedTypeWeigt] = useState<string[]>([]);
+interface WeigthProductsFilterProps {
+  selectedTypeWeigth: string[];
+  handleSelectedTypeWeigt: (item: string) => void;
+}
 
+const WeigthProductsFilter = ({
+  selectedTypeWeigth,
+  handleSelectedTypeWeigt,
+}: WeigthProductsFilterProps) => {
   const weigthProducts: string[] = ["250 гр", "350 гр", "500 гр"];
-
-  const handleSelectedTypeWeigt = (item: string) => {
-    if (selectedTypeWeigth.includes(item)) {
-      setSelectedTypeWeigt(
-        selectedTypeWeigth.filter((weigt) => weigt !== item)
-      );
-    } else {
-      setSelectedTypeWeigt([...selectedTypeWeigth, item]);
-    }
-  };
 
   return (
     <div>

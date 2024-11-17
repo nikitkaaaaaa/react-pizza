@@ -2,18 +2,16 @@ import React, { useState } from "react";
 
 import selected_item_on_filter from "../../../../assets/icons/selected_item_on_filter.svg";
 
-const SizeProductsFilter = () => {
-  const sizeProducts: string[] = ["20 см", "30 см", "40см"];
+interface SizeProductsFilterProps {
+  selectedSize: string[];
+  handleSelectedTySizeProduct: (item: string) => void;
+}
 
-  const [selectedSize, setSelectedSize] = useState<string[]>([]);
-
-  const handleSelectedTySizeProduct = (item: string) => {
-    if (selectedSize.includes(item)) {
-      setSelectedSize(selectedSize.filter((size) => size !== item));
-    } else {
-      setSelectedSize([...selectedSize, item]);
-    }
-  };
+const SizeProductsFilter = ({
+  selectedSize,
+  handleSelectedTySizeProduct,
+}: SizeProductsFilterProps) => {
+  const sizeProducts: string[] = ["20 см", "30 см", "40 см"];
 
   return (
     <div>

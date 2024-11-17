@@ -4,5 +4,9 @@ export default interface Iproducts {
   price: number;
   title: string;
   description: string;
-  category: number;
+  rating: number;
+  typeDough: string;
+  weigth: string;
+  size: string;
+  category: string;
 }
