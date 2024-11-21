@@ -53,7 +53,7 @@ const Main = () => {
 
       <div className="text-2xl font-bold mb-6">Фильтрация</div>
 
-      <div className="flex gap-32 bordser border-red-800 ">
+      <div className="flex gap-32  ">
         <div className={style.filters_products}>
           <FltersProducts
             handleSelectTypeDough={(typeDough: string[]) =>

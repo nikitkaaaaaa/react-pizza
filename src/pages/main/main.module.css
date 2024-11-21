@@ -1,11 +1,14 @@
 .products {
   width: 80%;
+  height: 840px;
+  overflow: hidden;
 }
 
 .content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* border: 1px solid red; */
+
   gap: 70px;
 }
 

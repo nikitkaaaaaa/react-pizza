@@ -16,7 +16,7 @@ const Products = ({ products }: ProductsProps) => {
           <Card key={item.id} {...item} />
         ))}
       </div>
-      <div className="border border-black ">
+      <div className="">
         {products.length < 1 && (
           <div className="text-4xl font-bold flex flex-col items-center justify-center h-[800px]">
             Товары не найдены
