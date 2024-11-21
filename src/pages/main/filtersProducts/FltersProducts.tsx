@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 
-import WeigthProductsFilter from "./weigthProductsFilter/WeigthProductsFilter";
-import TypeDoughFilter from "./typeDoughFilter/TypeDoughFilter";
 import PriceProductsFilter from "./priceProductsFilter/PriceProductsFilter";
-import SizeProductsFilter from "./sizeProductsFilter/SizeProductsFilter";
-import FeatureProductsFilter from "./featureProductsFilter/FeatureProductsFilter";
+import ItemProductsFilter from "./itemProductsFilter/ItemProductsFilter";
 
 interface FltersProductsProps {
   handleSelectTypeDough: (typeDough: string[]) => void;
@@ -23,9 +20,17 @@ const FltersProducts = ({
   handleSelectPriceTo,
   handleSelectFeatureProducts,
 }: FltersProductsProps) => {
+  const sizeProducts: string[] = ["20 см", "30 см", "40 см"];
+
+  const weigthProducts: string[] = ["250 гр", "350 гр", "500 гр"];
+
+  const typeFeatureProduct: string[] = ["Для компании", "Новинки"];
+
+  const typeDough: string[] = ["Традиционное", "Тонкое"];
+
   const [selectedTypeDough, setSelectedTypeDough] = useState<string[]>([]); // выбранный обьект из списка типа теста продукта
 
-  const [selectedTypeWeigth, setSelectedTypeWeigt] = useState<string[]>([]); // выбранный обьект из списка массы продукта
+  const [selectedWeigth, setSelectedWeigt] = useState<string[]>([]); // выбранный обьект из списка массы продукта
 
   const [selectedSize, setSelectedSize] = useState<string[]>([]); // выбранный обьект из списка размера продукта
 
@@ -35,17 +40,15 @@ const FltersProducts = ({
 
   const [valuePriceTo, setValuePriceTo] = useState<string>(""); // значение цены (до)
 
-  const handleSelectedTypeWeigt = (item: string) => {
-    if (selectedTypeWeigth.includes(item)) {
-      setSelectedTypeWeigt(
-        selectedTypeWeigth.filter((weigt) => weigt !== item)
-      );
+  const handleSelectedWeigt = (item: string) => {
+    if (selectedWeigth.includes(item)) {
+      setSelectedWeigt(selectedWeigth.filter((weigt) => weigt !== item));
     } else {
-      setSelectedTypeWeigt([...selectedTypeWeigth, item]);
+      setSelectedWeigt([...selectedWeigth, item]);
     }
   };
 
-  const handleSelectedTySizeProduct = (item: string) => {
+  const handleSelectedSizeProduct = (item: string) => {
     if (selectedSize.includes(item)) {
       setSelectedSize(selectedSize.filter((size) => size !== item));
     } else {
@@ -71,7 +74,7 @@ const FltersProducts = ({
 
   const handleUpdateFilters = () => {
     handleSelectTypeDough(selectedTypeDough);
-    handleSelectWeigthProducts(selectedTypeWeigth);
+    handleSelectWeigthProducts(selectedWeigth);
     handleSelectSizeProducts(selectedSize);
     handleSelectFeatureProducts(selectedFeature);
     handleSelectPriceFrom(valuePriceFrom);
@@ -81,9 +84,10 @@ const FltersProducts = ({
   return (
     <div className="text-lg">
       {/* Фильтр по новинкам и для компании */}
-      <FeatureProductsFilter
-        selectedFeature={selectedFeature}
-        handleSelectedTypeFeature={handleSelectedTypeFeature}
+      <ItemProductsFilter
+        arr={typeFeatureProduct}
+        selectedItem={selectedFeature}
+        handleSelectedItem={handleSelectedTypeFeature}
       />
       {/* Фильтр по новинкам и для компании */}
 
@@ -101,27 +105,34 @@ const FltersProducts = ({
       <hr className="my-5" />
 
       {/* Фильтр по весу */}
-      <WeigthProductsFilter
-        selectedTypeWeigth={selectedTypeWeigth}
-        handleSelectedTypeWeigt={handleSelectedTypeWeigt}
+      <ItemProductsFilter
+        arr={weigthProducts}
+        selectedItem={selectedWeigth}
+        handleSelectedItem={handleSelectedWeigt}
+        titleFilter={"Вес"}
       />
       {/* Фильтр по весу */}
 
       <hr className="my-5" />
 
       {/* Фильтр по размеру */}
-      <SizeProductsFilter
-        selectedSize={selectedSize}
-        handleSelectedTySizeProduct={handleSelectedTySizeProduct}
+      <ItemProductsFilter
+        arr={sizeProducts}
+        selectedItem={selectedSize}
+        handleSelectedItem={handleSelectedSizeProduct}
+        titleFilter={"Размеры"}
       />
       {/* Фильтр по размеру */}
 
       <hr className="my-5" />
 
       {/* Фильтр по типу теста */}
-      <TypeDoughFilter
-        selectedTypeDough={selectedTypeDough}
-        handleSelectedTypeDough={handleSelectedTypeDough}
+
+      <ItemProductsFilter
+        arr={typeDough}
+        selectedItem={selectedTypeDough}
+        handleSelectedItem={handleSelectedTypeDough}
+        titleFilter={"Тип теста"}
       />
       {/* Фильтр по типу теста */}
 

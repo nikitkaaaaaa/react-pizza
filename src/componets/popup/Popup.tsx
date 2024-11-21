@@ -161,7 +161,7 @@ const Popup = ({
           <img
             src={close_popup}
             alt="close popup"
-            className="cursor-pointer absolute top-[180px] right-[450px] transition-transform duration-300 ease-in-out hover:scale-110"
+            className="cursor-pointer absolute top-[180px] right-[460px] transition-transform duration-300 ease-in-out hover:scale-110"
             onClick={handleClosePopup}
           />
         </div>
