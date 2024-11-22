@@ -5,7 +5,10 @@ import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/cart.svg";
 import lupa from "../../assets/icons/lupa.svg";
 
-const Header = () => {
+interface HeaderProps {
+  openCart: () => void;
+}
+const Header = ({ openCart }: HeaderProps) => {
   return (
     <div className={style.header}>
       {/* Логотип и описание */}
@@ -38,7 +41,10 @@ const Header = () => {
         <div className="px-3.5 text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center">
           <button>Заказы</button>
         </div>
-        <div className="px-2.5  text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center cursor-pointer">
+        <div
+          className="px-2.5  text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center cursor-pointer"
+          onClick={openCart}
+        >
           <img src={cart} alt="cart" />
         </div>
       </div>
