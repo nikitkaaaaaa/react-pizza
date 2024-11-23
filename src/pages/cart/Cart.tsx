@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import style from "./cart.module.css";
 import arrow_button_buy_product from "../../assets/icons/arrow_button_buy_product.svg";
 import close_cart from "../../assets/icons/close_cart.svg";
 import CartCard from "../../componets/card/CartCard";
 import useDisableScroll from "../../hooks/UseDisableScroll";
+import { useGetCartProductsQuery } from "../../api/cartApi/cartApi";
+import useClickOutside from "../../hooks/UseCloseBlcok";
 
 interface CartProps {
   showCart: boolean;
@@ -12,45 +14,26 @@ interface CartProps {
 }
 
 const Cart = ({ showCart, closeCart }: CartProps) => {
-  const [animateCart, setAnimateCart] = useState(false); // Для анимации
+  const [animateCart, setAnimateCart] = useState(false);
 
-  const productsCart = [
-    {
-      id: 1,
-      imageUrl:
-        "https://media.dodostatic.net/image/r:584x584/11EE7D614A46A625AE3FD9EE995314BD.avif",
-      title: "Диабло",
-      size: "30",
-      typeDough: "Традиционное",
-      price: 965,
-    },
-    {
-      id: 2,
-      imageUrl:
-        "https://media.dodostatic.net/image/r:584x584/11EEF9E4417B796B852CA22778AB59F7.avif",
-      title: "Двойная пепперони",
-      typeDough: "Традиционное",
-      price: 365,
-      size: "20",
-    },
-    {
-      id: 12,
-      imageUrl:
-        "https://media.dodostatic.net/image/r:292x292/11EE7D6108E3A1C9952CD3A7F39A4D02.avif",
-      title: "Диабло",
-      typeDough: "Тонкое",
-      price: 665,
-      size: "40",
-    },
-  ];
+  const { data: productsCart = [] } = useGetCartProductsQuery();
+
+  const windowForm = useRef<HTMLDivElement>(null);
+
+  const totlaPrice = productsCart.reduce(
+    (total, item) => total + item.price * item.count,
+    0
+  );
 
   useDisableScroll(showCart); // Отключение скролла при открытии
 
+  useClickOutside(windowForm, () => setAnimateCart(false)); // Закрытие окна при клике вне его
+
   useEffect(() => {
     if (showCart) {
-      setAnimateCart(true); //  класс для анимации открытия
+      setAnimateCart(true);
     } else {
-      setAnimateCart(false); // класс для анимации закрытия
+      setAnimateCart(false);
     }
   }, [showCart]);
 
@@ -67,10 +50,12 @@ const Cart = ({ showCart, closeCart }: CartProps) => {
           <div
             className={`${style.cart} ${animateCart ? style.show : ""}`}
             onTransitionEnd={handleAnimationEnd} // Событие завершения анимации
+            ref={windowForm}
           >
             <div className="text-xl flex justify-between items-center px-7 py-5">
               <div>
-                В корзине <span className="font-bold">3 товара</span>
+                В корзине{" "}
+                <span className="font-bold">{productsCart.length} товара</span>
               </div>
 
               <img
@@ -80,19 +65,22 @@ const Cart = ({ showCart, closeCart }: CartProps) => {
                 onClick={() => setAnimateCart(false)}
               />
             </div>
-            <div>
+            <div className={style.cart_products}>
               {productsCart.map((item) => (
                 <CartCard key={item.id} {...item} />
               ))}
             </div>
-            <div className="px-7 py-5 bg-[white] flex flex-col gap-y-5 fixed bottom-0 right-0 z-50 w-[395px]">
+
+            <div className={style.cart_button_buy}>
               <div className="flex justify-between items-center">
                 <div>Итого :</div>
-                <div className="font-bold">2245 ₽</div>
+                <div className="font-bold">{totlaPrice} ₽</div>
               </div>
               <div className="flex justify-between items-center">
                 <div>Налог 5% :</div>
-                <div className="font-bold">121 ₽</div>
+                <div className="font-bold">
+                  {Math.round(totlaPrice * 0.05)} ₽
+                </div>
               </div>
               <button className="bg-[#FE5F00] text-white rounded-[18px] py-3 flex justify-center items-center relative">
                 <span> Оформить заказ</span>

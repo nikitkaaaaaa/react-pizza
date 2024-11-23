@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import style from "./popup.module.css";
 import close_popup from "../../assets/icons/close_popup.svg";
@@ -6,8 +6,15 @@ import add_ingredients from "../../assets/icons/add_ingredients.svg";
 import IPopup from "./IPopup";
 import { useGetIngredientsQuery } from "../../api/ingredientsApi/ingredientsApi";
 import useDisableScroll from "../../hooks/UseDisableScroll";
+import {
+  useAddProductToCartMutation,
+  useGetCartProductsQuery,
+  useRemoveOrAddOneProductToCartMutation,
+} from "../../api/cartApi/cartApi";
+import useClickOutside from "../../hooks/UseCloseBlcok";
 
 const Popup = ({
+  id,
   title,
   showPopup,
   imageUrl,
@@ -18,6 +25,8 @@ const Popup = ({
   const sizeImage: string[] = ["336px", "409px", "482px"];
 
   const { data: ingredients = [] } = useGetIngredientsQuery();
+
+  const { data: cartProducts = [] } = useGetCartProductsQuery();
 
   const sizeProduct: string[] = ["20 см", "30 см", "40 см"];
 
@@ -33,6 +42,26 @@ const Popup = ({
     return total + ingredients[index].price;
   }, price); // цена продукта с учетом ингредиентов
 
+  const serializedIngredients = JSON.stringify(
+    selectIngredients.map((index) => ingredients[index].title)
+  );
+
+  const productInCart = cartProducts.find(
+    (item) =>
+      item.parentId === id &&
+      item.typeDough === typeDough[selectTypeDough] &&
+      item.size === sizeProduct[selectSizeProduct] &&
+      item.price === totalPrice &&
+      JSON.stringify(item.ingredients) === serializedIngredients
+  ); // продукт, который находится в корзине
+
+  const windowForm = useRef<HTMLDivElement>(null);
+
+  const [addProductToCart] = useAddProductToCartMutation();
+
+  const [removeOrAddOneProductToCart] =
+    useRemoveOrAddOneProductToCartMutation();
+
   const handleSelectIngredients = (ingredient: number) => {
     if (selectIngredients.includes(ingredient)) {
       setSelectIngredients(
@@ -43,21 +72,53 @@ const Popup = ({
     }
   };
 
-  // закрыть popup
   const handleClosePopup = () => {
     closePopup();
     setSelectSizeProduct(1);
     setSelectTypeDough(0);
     setSelectIngredients([]);
+  }; // закрыть popup
+
+  const handleAddProductToCart = async () => {
+    handleClosePopup();
+
+    try {
+      if (productInCart) {
+        await removeOrAddOneProductToCart({
+          id: productInCart.id,
+          count: productInCart.count + 1,
+        }).unwrap();
+      } else {
+        const product = {
+          id: id,
+          parentId: id,
+          title: title,
+          imageUrl: imageUrl[1],
+          price: totalPrice,
+          size: sizeProduct[selectSizeProduct],
+          typeDough: typeDough[selectTypeDough],
+          ingredients: selectIngredients.map(
+            (index) => ingredients[index].title
+          ),
+          count: 1,
+        };
+
+        await addProductToCart(product).unwrap();
+      }
+    } catch (error) {
+      alert("Не удалось обработать операцию!");
+    }
   };
 
   useDisableScroll(showPopup); // отмена скролла при открытии popup
+
+  useClickOutside(windowForm, closePopup); // Закрытие окна при клике вне его
 
   return (
     <div>
       {showPopup && (
         <div className={style.blur}>
-          <div className={style.popup}>
+          <div className={style.popup} ref={windowForm}>
             <div className={style.popup_left_side}>
               <img
                 src={imageUrl[selectTypeDough]}
@@ -67,11 +128,13 @@ const Popup = ({
             </div>
             <div className={style.popup_right_side}>
               <div className="font-bold text-2xl">{title}</div>
+
               <div className="text-gray-500 text-sm mt-1">
                 {sizeProduct[selectSizeProduct]},{" "}
                 <span className="lowercase">{typeDough[selectTypeDough]}</span>{" "}
                 тесто {sizeProduct[selectSizeProduct]}
               </div>
+
               <div className="text-sm mb-3 mt-2">{description}</div>
 
               {/* Выбрать размер пррдукта */}
@@ -151,7 +214,11 @@ const Popup = ({
               {/* Добавить  ингредиенты*/}
 
               <div className="fixed bottom-0 z-30 right-4 bg-white  mt-[24px] ml-[30px] w-[364px] h-[115px] flex flex-col justify-center items-center pl-8    ">
-                <button className="w-[334px] border-none px-[48px] py-[12px] bg-[#FF6900] mr-[30px] text-white h-[48px] text-base outline-none text-center rounded-full">
+                <button
+                  className="w-[334px] border-none px-[48px] py-[12px] bg-[#FF6900] mr-[30px]
+                 text-white h-[48px] text-base outline-none text-center rounded-full"
+                  onClick={handleAddProductToCart}
+                >
                   В корзину за {totalPrice} ₽
                 </button>
               </div>

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 
-import Icard from "./Icard";
 import Popup from "../popup/Popup";
+
+interface Icard {
+  id: number;
+  imageUrl: string[];
+  price: number;
+  title: string;
+  description: string;
+}
 
 const Card = ({ id, imageUrl, price, title, description }: Icard) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
@@ -26,6 +33,7 @@ const Card = ({ id, imageUrl, price, title, description }: Icard) => {
         </div>
       </div>
       <Popup
+        id={id}
         title={title}
         showPopup={showPopup}
         closePopup={() => setShowPopup(false)}
