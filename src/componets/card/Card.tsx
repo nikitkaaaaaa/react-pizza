@@ -15,9 +15,13 @@ const Card = ({ id, imageUrl, price, title, description }: Icard) => {
 
   return (
     <div>
-      <div className="cursor-pointer" onClick={() => setShowPopup(true)}>
+      <div className="cursor-pointer " onClick={() => setShowPopup(true)}>
         <div className="flex justify-center">
-          <img src={imageUrl[0]} alt={title} className="w-[220px]" />
+          <img
+            src={imageUrl[0]}
+            alt={title}
+            className="w-[220px] transition-all duration-200 hover:translate-y-0.5"
+          />
         </div>
         <div className="font-bold text-xl">{title}</div>
         <div className="mt-2 text-gray-400 text-sm h-[60px]">{description}</div>

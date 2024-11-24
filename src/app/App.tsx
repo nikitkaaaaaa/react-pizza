@@ -14,9 +14,9 @@ const App = () => {
         <Header openCart={() => setShowCart(true)} />
       </div>
 
-      <hr className="my-6" />
+      <hr className="mt-3 mb-12" />
 
-      <div className="container">
+      <div>
         <Main />
         <Cart showCart={showCart} closeCart={() => setShowCart(false)} />
       </div>
