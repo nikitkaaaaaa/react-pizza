@@ -7,6 +7,8 @@ import CartCard from "../../componets/card/CartCard";
 import useDisableScroll from "../../hooks/UseDisableScroll";
 import { useGetCartProductsQuery } from "../../api/cartApi/cartApi";
 import useClickOutside from "../../hooks/UseCloseBlcok";
+import { useNavigate } from "react-router-dom";
+import routes from "../../routes/routes";
 
 interface CartProps {
   showCart: boolean;
@@ -20,10 +22,18 @@ const Cart = ({ showCart, closeCart }: CartProps) => {
 
   const windowForm = useRef<HTMLDivElement>(null);
 
-  const totlaPrice = productsCart.reduce(
+  const totlaPrice: number = productsCart.reduce(
     (total, item) => total + item.price * item.count,
     0
   );
+
+  const navigate = useNavigate();
+
+  const handleNavigateToOrderPage = () => {
+    setAnimateCart(false);
+    handleAnimationEnd();
+    navigate(routes.order);
+  };
 
   useDisableScroll(showCart); // Отключение скролла при открытии
 
@@ -82,7 +92,10 @@ const Cart = ({ showCart, closeCart }: CartProps) => {
                   {Math.round(totlaPrice * 0.05)} ₽
                 </div>
               </div>
-              <button className="bg-[#FE5F00] text-white rounded-[18px] py-3 flex justify-center items-center relative">
+              <button
+                className="bg-[#FE5F00] text-white rounded-[18px] py-3 flex justify-center items-center relative"
+                onClick={handleNavigateToOrderPage}
+              >
                 <span> Оформить заказ</span>
                 <img
                   src={arrow_button_buy_product}

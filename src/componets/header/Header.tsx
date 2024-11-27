@@ -4,6 +4,8 @@ import style from "./header.module.css";
 import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/cart.svg";
 import lupa from "../../assets/icons/lupa.svg";
+import { Link } from "react-router-dom";
+import routes from "../../routes/routes";
 
 interface HeaderProps {
   openCart: () => void;
@@ -13,7 +15,9 @@ const Header = ({ openCart }: HeaderProps) => {
     <div className={style.header}>
       {/* Логотип и описание */}
       <div className="flex items-center">
-        <img src={logo} alt="logo" />
+        <Link to={routes.main}>
+          <img src={logo} alt="logo" />
+        </Link>
         <div className="ml-3">
           <div className="text-lg font-bold">REACT PIZZA</div>
           <div className="text-gray-500">самые вкусные пиццы у нас</div>

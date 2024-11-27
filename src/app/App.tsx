@@ -4,6 +4,9 @@ import "./global.css";
 import Header from "../componets/header/Header";
 import Main from "../pages/main/Main";
 import Cart from "../pages/cart/Cart";
+import { Route, Routes } from "react-router-dom";
+import routes from "../routes/routes";
+import Order from "../pages/order/Order";
 
 const App = () => {
   const [showCart, setShowCart] = useState<boolean>(false);
@@ -16,10 +19,12 @@ const App = () => {
 
       <hr className="mt-3 mb-12" />
 
-      <div>
-        <Main />
-        <Cart showCart={showCart} closeCart={() => setShowCart(false)} />
-      </div>
+      <Routes>
+        <Route path={routes.main} element={<Main />}></Route>
+        <Route path={routes.order} element={<Order />}></Route>
+      </Routes>
+
+      <Cart showCart={showCart} closeCart={() => setShowCart(false)} />
     </>
   );
 };

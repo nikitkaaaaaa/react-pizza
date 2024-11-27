@@ -40,7 +40,7 @@ const Main = () => {
     <div>
       <div className="container text-4xl font-bold">Все пиццы</div>
       <div
-        className="sticky top-0 bg-white z-10  py-4 mb-6 bsorder border-black"
+        className="sticky top-0 bg-white z-10  py-4 mb-6"
         style={{ boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)" }}
       >
         {/* Выбор категории продуктов и сортирвока */}
