@@ -2,18 +2,31 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import IOrder from "./IOrder";
-import { useGetCartProductsQuery } from "../../api/cartApi/cartApi";
+import {
+  useGetCartProductsQuery,
+  useRemoveProductFromCartMutation,
+} from "../../api/cartApi/cartApi";
 import DeliveryAddress from "./deliveryAddress/DeliveryAddress";
 import PersonalInfo from "./personalInfo/PersonalInfo";
 import Payment from "./payment/Payment";
+import { useAddProductToOrderMutation } from "../../api/orderApi/orderApi";
+import IorderApi from "../../api/orderApi/IOrderApi";
+import { useNavigate } from "react-router-dom";
+import routes from "../../routes/routes";
 
 const Order = () => {
   const { data: cartProducts = [] } = useGetCartProductsQuery();
+
+  const [addProductToOrder] = useAddProductToOrderMutation();
+
+  const [removeProductFromCart] = useRemoveProductFromCartMutation();
 
   const priceProducts: number = cartProducts.reduce(
     (total, item) => total + item.price * item.count,
     0
   );
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -22,14 +35,34 @@ const Order = () => {
     formState: { errors },
   } = useForm<IOrder>();
 
-  const handleOnSubmit = (data: IOrder) => {
-    console.log(data.name, "name");
-    console.log(data.Email, "Email");
-    console.log(data.address, "address");
-    console.log(data.phone, "phone");
-    console.log(data.surname, "surname");
-    console.log(data.message, "message");
+  const handleOnSubmit = async (data: IOrder) => {
     reset();
+    try {
+      navigate(routes.main);
+
+      setTimeout(() => {
+        alert("Вы оплатили корзину!");
+      }, 1250);
+
+      const product: IorderApi = {
+        products: cartProducts,
+        price: priceProducts,
+        name: data.name,
+        surname: data.surname,
+        phone: data.phone,
+        Email: data.Email,
+        message: data.message,
+        address: data.address,
+      };
+
+      await addProductToOrder(product);
+
+      for (let i = 0; i < cartProducts.length; i++) {
+        await removeProductFromCart(cartProducts[i].id).unwrap();
+      }
+    } catch (error) {
+      alert("Не удалось оплатить корзину!");
+    }
   };
 
   return (

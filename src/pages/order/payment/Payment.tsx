@@ -10,7 +10,7 @@ const Payment = ({ priceProducts }: PaymentProps) => {
       <div className="h-[375px] flex flex-col justify-between">
         <div className="px-10  h-full flex flex-col justify-center">
           <div className="text-xl ">Итого:</div>
-          <div className="font-bold text-3xl mt-1">2365 ₽</div>
+          <div className="font-bold text-3xl mt-1">{priceProducts} ₽</div>
         </div>
         <hr className="mb-6" />
         <div className="px-10 text-lg  h-full justify-center flex flex-col">

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import Iingredients from "./Iingredients";
 
-export const ingredients = createApi({
+export const ingredientsApi = createApi({
   reducerPath: "ingredients",
   baseQuery: fetchBaseQuery({ baseUrl: "https://8d3ce5b52258abb8.mokky.dev/" }),
   endpoints: (builder) => ({
@@ -12,4 +12,4 @@ export const ingredients = createApi({
   }),
 });
 
-export const { useGetIngredientsQuery } = ingredients;
+export const { useGetIngredientsQuery } = ingredientsApi;

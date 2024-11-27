@@ -1,20 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { productsApi } from "../productsApi/productsApi";
-import { ingredients } from "../ingredientsApi/ingredientsApi";
+
 import { cartApi } from "../cartApi/cartApi";
+import { ingredientsApi } from "../ingredientsApi/ingredientsApi";
+import { orderApi } from "../orderApi/orderApi";
 
 const store = configureStore({
   reducer: {
     [productsApi.reducerPath]: productsApi.reducer,
-    [ingredients.reducerPath]: ingredients.reducer,
+    [ingredientsApi.reducerPath]: ingredientsApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
   },
   middleware: (defaultMiddleware) =>
     defaultMiddleware().concat(
       productsApi.middleware,
-      ingredients.middleware,
-      cartApi.middleware
+      ingredientsApi.middleware,
+      cartApi.middleware,
+      orderApi.middleware
     ),
 });
 
