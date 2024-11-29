@@ -42,9 +42,11 @@ const Header = ({ openCart }: HeaderProps) => {
 
       {/* Кнопки Заказы и Корзина */}
       <div className="flex gap-3 items-center  ">
-        <div className="px-3.5 text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center">
-          <button>Заказы</button>
-        </div>
+        <Link to={routes.orders}>
+          <div className="px-3.5 text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center">
+            <button>Заказы</button>
+          </div>
+        </Link>
         <div
           className="px-2.5  text-[#FE5F00] border border-[#FE5F00] rounded-lg h-[40px] flex flex-col justify-center cursor-pointer"
           onClick={openCart}

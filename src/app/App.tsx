@@ -7,6 +7,7 @@ import Cart from "../pages/cart/Cart";
 import { Route, Routes } from "react-router-dom";
 import routes from "../routes/routes";
 import Order from "../pages/order/Order";
+import Orders from "../pages/orders/Orders";
 
 const App = () => {
   const [showCart, setShowCart] = useState<boolean>(false);
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route path={routes.main} element={<Main />}></Route>
         <Route path={routes.order} element={<Order />}></Route>
+        <Route path={routes.orders} element={<Orders />}></Route>
       </Routes>
 
       <Cart showCart={showCart} closeCart={() => setShowCart(false)} />
