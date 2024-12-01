@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import IOrder from "./IOrder";
@@ -11,7 +12,6 @@ import PersonalInfo from "./personalInfo/PersonalInfo";
 import Payment from "./payment/Payment";
 import { useAddProductToOrderMutation } from "../../api/orderApi/orderApi";
 import IorderApi from "../../api/orderApi/IOrderApi";
-import { useNavigate } from "react-router-dom";
 import routes from "../../routes/routes";
 
 const Order = () => {
@@ -72,7 +72,6 @@ const Order = () => {
 
         <form onSubmit={handleSubmit(handleOnSubmit)} className=" relative">
           {/* Персональная информация */}
-
           <PersonalInfo errors={errors} register={register} />
           {/* Персональная информация */}
 
@@ -81,7 +80,6 @@ const Order = () => {
           {/* Блок оплаты  */}
 
           {/* Адрес доставки */}
-
           <DeliveryAddress errors={errors} register={register} />
           {/* Адрес доставки */}
         </form>

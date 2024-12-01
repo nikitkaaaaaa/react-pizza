@@ -10,10 +10,12 @@ interface PersonalInfoProps {
 
 const PersonalInfo = ({ errors, register }: PersonalInfoProps) => {
   return (
-    <div className="w-1/2 ">
-      <div className="font-bold text-2xl">1. Персональная информация</div>
-      <hr className="my-4" />
-      <div className=" flex gap-8">
+    <div className="w-[750px] bg-white py-7 rounded-[30px]  ">
+      <div className="font-bold text-2xl px-10 ">
+        1. Персональная информация
+      </div>
+      <hr className="my-6" />
+      <div className=" flex gap-8 px-10 ">
         {/* Поле имя */}
         <div className="w-full text-sm h-[106px] ">
           <div className="font-bold">Имя</div>
@@ -45,9 +47,9 @@ const PersonalInfo = ({ errors, register }: PersonalInfoProps) => {
         {/* Поле Фамилия */}
       </div>
 
-      <div className="flex gap-8 mt-4">
+      <div className="flex gap-8 mt-4 px-10 ">
         {/* Поле e-mail */}
-        <div className="w-full text-sm h-[106px]">
+        <div className="w-full text-sm ">
           <div className="font-bold">E-mail</div>
           <input
             type="email"
@@ -63,7 +65,7 @@ const PersonalInfo = ({ errors, register }: PersonalInfoProps) => {
         {/* Поле e-mail */}
 
         {/* Поле Телефон */}
-        <div className="w-full text-sm h-[106px]">
+        <div className="w-full text-sm ">
           <div className="font-bold ">Телефон</div>
           <input
             type="tel"

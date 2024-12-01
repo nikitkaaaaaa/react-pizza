@@ -10,12 +10,12 @@ interface DeliveryAddressProps {
 
 const DeliveryAddress = ({ errors, register }: DeliveryAddressProps) => {
   return (
-    <div className="w-1/2 mt-5">
-      <div className="font-bold text-2xl">2. Адрес доставки</div>
-      <hr className="my-4" />
+    <div className="w-[750px] mt-8 bg-white rounded-[30px] py-7">
+      <div className="font-bold text-2xl px-10">2. Адрес доставки</div>
+      <hr className="my-6" />
 
       {/* Поле адрес */}
-      <div className="text-sm h-[106px]">
+      <div className="text-sm  px-10 ">
         <div className="font-bold text">Введите адрес</div>
         <input
           type="text"
@@ -31,7 +31,7 @@ const DeliveryAddress = ({ errors, register }: DeliveryAddressProps) => {
       {/* Поле адрес */}
 
       {/* Комментарий  */}
-      <div className="mt-4 text-sm  h-[160px]">
+      <div className="mt-4 text-sm  px-10 ">
         <div className="font-bold text-sm">Комментарий к заказу</div>
         <textarea
           placeholder="Укажите тут доплнительную информацию для курьера"

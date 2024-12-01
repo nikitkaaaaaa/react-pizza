@@ -6,7 +6,7 @@ interface PaymentProps {
 
 const Payment = ({ priceProducts }: PaymentProps) => {
   return (
-    <div className="bg-[#F9F7F6] w-[400px]  rounded-[30px] py-5 absolute top-0 right-0">
+    <div className="bg-white w-[400px]  rounded-[30px] py-5 absolute top-0 right-0">
       <div className="h-[375px] flex flex-col justify-between">
         <div className="px-10  h-full flex flex-col justify-center">
           <div className="text-xl ">Итого:</div>
@@ -21,7 +21,7 @@ const Payment = ({ priceProducts }: PaymentProps) => {
           <div className="flex justify-between items-center my-2 ">
             <div>Налоги: </div>
             <div className="font-bold ">
-              {Math.round(priceProducts * 0.05)}₽
+              {Math.round(priceProducts * 0.05)} ₽
             </div>
           </div>
           <div className="flex justify-between items-center ">
