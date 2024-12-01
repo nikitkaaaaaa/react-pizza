@@ -1,12 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import IorderApi from "./IOrderApi";
+
+import IOrderApi from "./IOrderApi";
 
 export const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://8d3ce5b52258abb8.mokky.dev/" }),
+  tagTypes: ["Order"],
   endpoints: (builder) => ({
-    getOrderProducts: builder.query<IorderApi[], void>({
+    getOrderProducts: builder.query<IOrderApi[], void>({
       query: () => "order",
+      providesTags: [{ type: "Order", id: "LIST" }],
     }),
 
     addProductToOrder: builder.mutation({
@@ -15,6 +18,7 @@ export const orderApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: [{ type: "Order", id: "LIST" }],
     }),
   }),
 });

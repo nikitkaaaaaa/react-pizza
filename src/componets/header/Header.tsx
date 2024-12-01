@@ -4,13 +4,15 @@ import style from "./header.module.css";
 import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/cart.svg";
 import lupa from "../../assets/icons/lupa.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import routes from "../../routes/routes";
 
 interface HeaderProps {
   openCart: () => void;
 }
 const Header = ({ openCart }: HeaderProps) => {
+  const location = useLocation();
+
   return (
     <div className={style.header}>
       {/* Логотип и описание */}
@@ -26,18 +28,21 @@ const Header = ({ openCart }: HeaderProps) => {
       {/* Логотип и описание */}
 
       {/* Поле ввода */}
-      <div className="w-[60%] px-3 relative">
-        <input
-          type="text"
-          className="w-full p-2 outline-none bg-[#F9F9F9] rounded-xl px-10 py-2.5 text-gray-500"
-          placeholder="Поиск пиццы..."
-        />
-        <img
-          src={lupa}
-          alt="lupa"
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 "
-        />
-      </div>
+      {location.pathname != routes.orders &&
+        location.pathname != routes.order && (
+          <div className="w-[60%] px-3 relative">
+            <input
+              type="text"
+              className="w-full p-2 outline-none bg-[#F9F9F9] rounded-xl px-10 py-2.5 text-gray-500"
+              placeholder="Поиск пиццы..."
+            />
+            <img
+              src={lupa}
+              alt="lupa"
+              className="absolute left-6 top-1/2 transform -translate-y-1/2 "
+            />
+          </div>
+        )}
       {/* Поле ввода */}
 
       {/* Кнопки Заказы и Корзина */}

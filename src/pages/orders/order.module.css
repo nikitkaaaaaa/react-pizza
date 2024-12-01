@@ -1,10 +1,10 @@
-.test {
+.products_order_item {
   background-color: white;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
   overflow-y: scroll;
 }
 
-.test::-webkit-scrollbar {
+.products_order_item::-webkit-scrollbar {
   display: none;
 }
