@@ -28,7 +28,6 @@ const Orders = () => {
                 ? "rounded-t-[30px] border-b"
                 : "rounded-[30px] border-b border-b-white"
             }`}
-            onClick={() => handleOpenOrder(String(index))}
           >
             <div className="flex items-center gap-5">
               <div className="text-xl font-bold">Заказ #{item.id}</div>
@@ -45,6 +44,7 @@ const Orders = () => {
                     ? "rotate-180"
                     : "rotate-0"
                 }`}
+                onClick={() => handleOpenOrder(String(index))}
               />
             </div>
           </div>

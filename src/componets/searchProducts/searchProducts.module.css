@@ -1,0 +1,17 @@
+.block_search_products {
+  position: absolute;
+  top: 55px;
+  left: 0;
+  width: 760px;
+  padding: 0.5rem 0;
+  background-color: white;
+  z-index: 30;
+  border-radius: 15px;
+  max-height: 122px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+  overflow-y: scroll;
+}
+
+.block_search_products::-webkit-scrollbar {
+  display: none;
+}

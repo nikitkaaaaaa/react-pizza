@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Popup from "../popup/Popup";
 
-interface Icard {
+interface CardProps {
   id: number;
   imageUrl: string[];
   price: number;
@@ -10,12 +10,16 @@ interface Icard {
   description: string;
 }
 
-const Card = ({ id, imageUrl, price, title, description }: Icard) => {
+const Card = ({ id, imageUrl, price, title, description }: CardProps) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
   return (
     <div>
-      <div className="cursor-pointer " onClick={() => setShowPopup(true)}>
+      <div
+        className="cursor-pointer "
+        onClick={() => setShowPopup(true)}
+        key={id}
+      >
         <div className="flex justify-center">
           <img
             src={imageUrl[0]}

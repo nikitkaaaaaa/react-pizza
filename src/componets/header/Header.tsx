@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 import style from "./header.module.css";
 import logo from "../../assets/icons/logo.svg";
 import cart from "../../assets/icons/cart.svg";
 import lupa from "../../assets/icons/lupa.svg";
+import clear_text from "../../assets/icons/clear_text.svg";
 import { Link, useLocation } from "react-router-dom";
 import routes from "../../routes/routes";
+import SearchProducts from "../searchProducts/SearchProducts";
 
 interface HeaderProps {
   openCart: () => void;
 }
 const Header = ({ openCart }: HeaderProps) => {
   const location = useLocation();
+
+  const [value, setValue] = useState<string>("");
 
   return (
     <div className={style.header}>
@@ -30,17 +34,31 @@ const Header = ({ openCart }: HeaderProps) => {
       {/* Поле ввода */}
       {location.pathname != routes.orders &&
         location.pathname != routes.order && (
-          <div className="w-[60%] px-3 relative">
+          <div className="w-[760px]  relative ">
             <input
               type="text"
-              className="w-full p-2 outline-none bg-[#F9F9F9] rounded-xl px-10 py-2.5 text-gray-500"
+              className="w-full h-[45px] outline-none bg-[#F9F9F9] rounded-[15px] px-12"
               placeholder="Поиск пиццы..."
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
             />
             <img
               src={lupa}
               alt="lupa"
-              className="absolute left-6 top-1/2 transform -translate-y-1/2 "
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 "
             />
+            {value.length >= 3 && (
+              <img
+                src={clear_text}
+                alt="clear text"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={() => setValue("")}
+              />
+            )}
+
+            {/* Блок поиска продуктов */}
+            <SearchProducts value={value} handleSetValue={() => setValue("")} />
+            {/* Блок поиска продуктов */}
           </div>
         )}
       {/* Поле ввода */}

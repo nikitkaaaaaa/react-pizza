@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import sort from "../../assets/icons/sort.svg";
+import useClickOutside from "../../hooks/UseCloseBlcok";
 
 interface SortProductsProps {
   handleSortProducts: (typeSort: string) => void;
@@ -24,6 +25,10 @@ const SortProducts = ({ handleSortProducts }: SortProductsProps) => {
     setCurrentTypeChoise(title);
   };
 
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(divRef, () => setShowSort(false)); // закрытие окна при клике вне его
+
   return (
     <div
       className="bg-[#F9F9F9] px-3 py-1 rounded-2xl flex items-center gap-2 h-[55px] cursor-pointer relative w-[235px]"
@@ -36,6 +41,7 @@ const SortProducts = ({ handleSortProducts }: SortProductsProps) => {
         className={`absolute top-12 left-0 w-full transition-all  px-0.5 py-1 overflow-hidden transition-max-height duration-300 ease-in-out ${
           showSort ? "max-h-40" : "max-h-0"
         }`}
+        ref={divRef}
       >
         <div className=" shadow-md rounded-2xl z-10 bg-white">
           {tupeSort.map((item, index) => (

@@ -112,7 +112,7 @@ const Popup = ({
 
   useDisableScroll(showPopup); // отмена скролла при открытии popup
 
-  useClickOutside(windowForm, closePopup); // Закрытие окна при клике вне его
+  useClickOutside(windowForm, closePopup); // закрытие окна при клике вне его
 
   return (
     <div>

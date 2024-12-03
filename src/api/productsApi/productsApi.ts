@@ -9,6 +9,7 @@ export const productsApi = createApi({
     getProducts: builder.query<
       Iproducts[],
       {
+        title?: string;
         sort?: string;
         typeDough?: string[];
         weigth?: string[];
@@ -20,6 +21,7 @@ export const productsApi = createApi({
       }
     >({
       query: ({
+        title,
         sort,
         typeDough,
         weigth,
@@ -30,6 +32,8 @@ export const productsApi = createApi({
         feature,
       }) => {
         const params = new URLSearchParams();
+
+        if (title) params.append("title", `*${title}*`);
 
         if (sort) params.append("sortBy", sort);
 
