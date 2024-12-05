@@ -10,16 +10,18 @@ interface ProductsProps {
 
 const Products = ({ products }: ProductsProps) => {
   return (
-    <div className="">
+    <div>
       <div className={style.content}>
         {products.map((item) => (
           <Card key={item.id} {...item} />
         ))}
       </div>
-      <div className="">
+
+      <div>
         {products.length < 1 && (
-          <div className="text-4xl font-bold flex flex-col items-center justify-center h-[800px]">
-            Товары не найдены
+          <div className="text-2xl font-bold flex flex-col items-center justify-center h-[800px] text-center">
+            Мы не нашли товары, соответствующие вашим фильтрам. Попробуйте
+            выбрать другие параметры!
           </div>
         )}
       </div>

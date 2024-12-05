@@ -25,9 +25,16 @@ const SearchProducts = ({ value, handleSetValue }: SearchProductsProps) => {
       {value.length >= 3 && (
         <div className="">
           <div className={style.block_search_products} ref={divRef}>
-            {products.map((item) => (
-              <SearchProductsCard key={item.id} {...item} />
-            ))}
+            {products.length >= 1 ? (
+              products.map((item) => (
+                <SearchProductsCard key={item.id} {...item} />
+              ))
+            ) : (
+              <div className="bosrder border-black text-center py-1">
+                По вашему запросу <span className="font-bold">"{value}"</span>{" "}
+                ничего не найдено
+              </div>
+            )}
           </div>
         </div>
       )}
