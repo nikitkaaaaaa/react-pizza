@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import style from "./header.module.css";
 import logo from "../../assets/icons/logo.svg";
@@ -8,6 +8,7 @@ import clear_text from "../../assets/icons/clear_text.svg";
 import { Link, useLocation } from "react-router-dom";
 import routes from "../../routes/routes";
 import SearchProducts from "../searchProducts/SearchProducts";
+import useClickOutside from "../../hooks/UseCloseBlcok";
 
 interface HeaderProps {
   openCart: () => void;
@@ -16,6 +17,12 @@ const Header = ({ openCart }: HeaderProps) => {
   const location = useLocation();
 
   const [value, setValue] = useState<string>("");
+
+  const [showSearchBlock, setShowSearchBlock] = useState<boolean>(false);
+
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(divRef, () => setShowSearchBlock(false)); // закрытие окна при клике вне его
 
   return (
     <div className={style.header}>
@@ -34,13 +41,14 @@ const Header = ({ openCart }: HeaderProps) => {
       {/* Поле ввода */}
       {location.pathname != routes.orders &&
         location.pathname != routes.order && (
-          <div className="w-[760px]  relative ">
+          <div className="w-[760px]  relative " ref={divRef}>
             <input
               type="text"
               className="w-full h-[45px] outline-none bg-[#F9F9F9] rounded-[15px] px-12"
               placeholder="Поиск пиццы..."
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onClick={() => setShowSearchBlock(true)}
             />
             <img
               src={lupa}
@@ -57,7 +65,7 @@ const Header = ({ openCart }: HeaderProps) => {
             )}
 
             {/* Блок поиска продуктов */}
-            <SearchProducts value={value} handleSetValue={() => setValue("")} />
+            <SearchProducts value={value} showSearchBlock={showSearchBlock} />
             {/* Блок поиска продуктов */}
           </div>
         )}
