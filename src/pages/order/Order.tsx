@@ -13,9 +13,10 @@ import Payment from "./payment/Payment";
 import { useAddProductToOrderMutation } from "../../api/orderApi/orderApi";
 import IorderApi from "../../api/orderApi/IOrderApi";
 import routes from "../../routes/routes";
+import Loading from "../../componets/loading/Loading";
 
 const Order = () => {
-  const { data: cartProducts = [] } = useGetCartProductsQuery();
+  const { data: cartProducts = [], isLoading } = useGetCartProductsQuery();
 
   const [addProductToOrder] = useAddProductToOrderMutation();
 
@@ -64,6 +65,8 @@ const Order = () => {
       alert("Не удалось оплатить корзину!");
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>

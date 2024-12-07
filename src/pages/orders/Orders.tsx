@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import style from "./order.module.css";
 import arrow_order_item from "../../assets/icons/arrow_order_item.svg";
 import { useGetOrderProductsQuery } from "../../api/orderApi/orderApi";
+import Loading from "../../componets/loading/Loading";
 
 const Orders = () => {
-  const { data: ordersProducts = [] } = useGetOrderProductsQuery();
+  const { data: ordersProducts = [], isLoading } = useGetOrderProductsQuery();
 
   const [openOrdersItem, setOpenOrdersItem] = useState<string[]>([]);
 
@@ -16,6 +17,8 @@ const Orders = () => {
       setOpenOrdersItem([...openOrdersItem, item]);
     }
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="container">

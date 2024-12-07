@@ -7,6 +7,7 @@ import Products from "./products/Products";
 import FltersProducts from "./filtersProducts/FltersProducts";
 import { useGetProductsQuery } from "../../api/productsApi/productsApi";
 import Stories from "../../componets/stories/Stories";
+import Loading from "../../componets/loading/Loading";
 
 const Main = () => {
   const [sort, setSort] = useState<string>("-rating"); // тип сортировки продукта
@@ -35,6 +36,8 @@ const Main = () => {
     category: category,
     feature: feature,
   });
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>
