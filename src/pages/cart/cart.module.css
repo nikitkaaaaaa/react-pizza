@@ -1,55 +1,62 @@
 .blur {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.65);
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 95;
+  display: none;
+  transition: background-color 0.2s;
 }
 
-.blur.show {
-  opacity: 1;
+.blur.active {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .cart {
-  width: 395px;
-  height: 100%;
   position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 140;
+  top: 0px;
+  right: -400px;
+  min-height: 100vh;
+  max-height: 100vh;
+  transition: right 0.2s ease-in-out;
+  z-index: 95;
+  overflow-y: auto;
+  width: 395px;
   background-color: #f4f1ee;
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
 }
 
-.cart.show {
-  transform: translateX(0);
+.cart.active {
+  right: 0;
 }
 
 .cart_products {
-  height: 100%;
+  height: 700px;
+  position: relative;
   overflow-y: scroll;
-  padding-bottom: 100px;
 }
 
 .cart_button_buy {
+  display: flex;
   padding-left: 1.75rem;
   padding-right: 1.75rem;
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
   background-color: white;
-  display: flex;
   flex-direction: column;
   gap: 1.25rem;
   position: fixed;
   bottom: 0;
-  right: 0;
+  right: -400px;
   z-index: 50;
+  transition: 0.2s ease-in-out;
   width: 395px;
+}
+
+.cart_button_buy.active {
+  right: 0;
 }
 
 .cart_products::-webkit-scrollbar {
