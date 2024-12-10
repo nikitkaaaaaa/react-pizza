@@ -8,6 +8,7 @@ import FltersProducts from "./filtersProducts/FltersProducts";
 import { useGetProductsQuery } from "../../api/productsApi/productsApi";
 import Stories from "../../componets/stories/Stories";
 import Loading from "../../componets/loading/Loading";
+import Pagination from "../../componets/pagination/Pagination";
 
 const Main = () => {
   const [sort, setSort] = useState<string>("-rating"); // тип сортировки продукта
@@ -63,9 +64,9 @@ const Main = () => {
       <div className="container">
         <Stories />
 
-        <div className="text-2xl font-bold mb-4 mt-6">Фильтрация</div>
+        <div className="text-2xl font-bold  mt-6">Фильтрация</div>
 
-        <div className="flex gap-32">
+        <div className="flex gap-32  my-5">
           <div className={style.filters_products}>
             <FltersProducts
               handleSelectTypeDough={(typeDough: string[]) =>
@@ -89,6 +90,7 @@ const Main = () => {
             <Products products={products} />
           </div>
         </div>
+        <Pagination products={products} />
       </div>
     </div>
   );

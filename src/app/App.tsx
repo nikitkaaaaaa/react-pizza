@@ -8,6 +8,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import routes from "../routes/routes";
 import Order from "../pages/order/Order";
 import Orders from "../pages/orders/Orders";
+import Footer from "../componets/footer/Footer";
 
 const App = () => {
   const [showCart, setShowCart] = useState<boolean>(false);
@@ -40,6 +41,8 @@ const App = () => {
       </Routes>
 
       <Cart showCart={showCart} closeCart={() => setShowCart(false)} />
+
+      <Footer />
     </>
   );
 };
