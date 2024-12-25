@@ -27,7 +27,7 @@ const App = () => {
   }, [location]);
 
   return (
-    <>
+    <div>
       <div className="container">
         <Header openCart={() => setShowCart(true)} />
       </div>
@@ -43,7 +43,7 @@ const App = () => {
       <Cart showCart={showCart} closeCart={() => setShowCart(false)} />
 
       <Footer />
-    </>
+    </div>
   );
 };
 

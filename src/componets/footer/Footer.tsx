@@ -52,7 +52,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="bg-[#181818] text-white">
+    <div className="bg-[#181818] text-white mt-[100px]">
       <div className="container py-[30px] ">
         <div className="flex justify-between">
           {/* О нас */}

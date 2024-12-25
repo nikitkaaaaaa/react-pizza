@@ -9,6 +9,8 @@ export const productsApi = createApi({
     getProducts: builder.query<
       Iproducts[],
       {
+        page?: number;
+        limit?: number;
         title?: string;
         sort?: string;
         typeDough?: string[];

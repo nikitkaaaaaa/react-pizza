@@ -17,7 +17,7 @@ const SearchProducts = ({ value, showSearchBlock }: SearchProductsProps) => {
       {showSearchBlock && value.length >= 3 && (
         <div className="">
           <div className={style.block_search_products}>
-            {products.length >= 1 ? (
+            {products.length && products.length >= 1 ? (
               products.map((item) => (
                 <SearchProductsCard key={item.id} {...item} />
               ))

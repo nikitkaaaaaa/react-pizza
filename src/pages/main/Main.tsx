@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import style from "./main.module.css";
 import SelectCategory from "../../componets/selectCategory/SelectCategory";
@@ -8,7 +8,6 @@ import FltersProducts from "./filtersProducts/FltersProducts";
 import { useGetProductsQuery } from "../../api/productsApi/productsApi";
 import Stories from "../../componets/stories/Stories";
 import Loading from "../../componets/loading/Loading";
-import Pagination from "../../componets/pagination/Pagination";
 
 const Main = () => {
   const [sort, setSort] = useState<string>("-rating"); // тип сортировки продукта
@@ -90,7 +89,6 @@ const Main = () => {
             <Products products={products} />
           </div>
         </div>
-        <Pagination products={products} />
       </div>
     </div>
   );
